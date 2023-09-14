@@ -1,0 +1,17 @@
+import tensorflow as tf
+import numpy as np
+from deepface import DeepFace 
+import matplotlib.pyplot as plt 
+import cv2
+import pandas as pd
+
+
+print(tf.__version__)
+print(np.__version__)
+print(cv2.__version__)
+
+attributes = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg")
+
+print(attributes) 
+
+# DeepFace.stream(db_path="C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg", source = 6)
