@@ -4,6 +4,8 @@ from deepface import DeepFace
 import matplotlib.pyplot as plt 
 import cv2
 import pandas as pd
+from glob import glob
+import os
 
 
 print(tf.__version__)
@@ -13,5 +15,45 @@ print(cv2.__version__)
 attributes = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg")
 
 print(attributes) 
+print("\n")
 
 # DeepFace.stream(db_path="C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg", source = 6)
+
+ov = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/Student OV Chipcaart Profile Pic.jpeg")
+print(ov) 
+print("\n")
+
+# Define the folder path
+image_folder = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/gabe"
+
+# Get a list of all the image files in the folder
+image_files = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith(('.jpg', '.jpeg', '.png'))]
+
+backends = ["opencv", "ssd", "dlib", "mtcnn", "retinaface", "mediapipe"]
+
+for image_file in image_files:
+    img = cv2.imread(image_file)
+    if img is not None:
+        demography = DeepFace.analyze(
+            img_path=image_file, detector_backend=backends[4]
+        )
+        if "emotion" in demography[0]:
+            emotion_predictions = demography[0]["emotion"]
+            emo_df = pd.DataFrame(emotion_predictions, index=[0]).T.rename(
+                columns={0: "prediction"}
+            )
+
+            def plot_img_emotion(img, emo_df, figsize=(15, 5)):
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                fig, axs = plt.subplots(1, 2, figsize=figsize)
+                axs[0].axis("off")
+                axs[0].imshow(img)
+                emo_df.sort_values("prediction").plot(kind="barh", figsize=figsize, ax=axs[1])
+                plt.tight_layout()
+                plt.show()
+
+            plot_img_emotion(img, emo_df)
+        else:
+            print(f"No emotion information found in the analysis for {image_file}.")
+    else:
+        print(f"Error reading the image at path: {image_file}")
