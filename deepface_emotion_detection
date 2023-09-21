@@ -12,19 +12,19 @@ print(tf.__version__)
 print(np.__version__)
 print(cv2.__version__)
 
-attributes = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg")
+attributes = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/robert/roxie and i.jpg")
 
 print(attributes) 
 print("\n")
 
 # DeepFace.stream(db_path="C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/roxie and i.jpg", source = 6)
 
-ov = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/Student OV Chipcaart Profile Pic.jpeg")
+ov = DeepFace.analyze(img_path = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/robert/Student OV Chipcaart Profile Pic.jpeg")
 print(ov) 
 print("\n")
 
 # Define the folder path
-image_folder = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/gabe"
+image_folder = "C:/Users/robjl/Documents/Python Playground/Spotify Emotion Automator/spotifyEmotionAutomator/spotifyEmotionBasedRecommenderSystem/images/robert"
 
 # Get a list of all the image files in the folder
 image_files = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith(('.jpg', '.jpeg', '.png'))]
